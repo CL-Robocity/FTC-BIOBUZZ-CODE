@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode.Odometry;
+package org.firstinspires.ftc.teamcode.autonomus;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -14,7 +13,7 @@ public class Autonoma extends LinearOpMode {
     private Follower       follower;
     private RobotHardware  robot;
     private AutonomaConfig config;
-    private ActionHandler  actions;
+    private ActionHandler actions;
 
     private static final double ALIGN_TOLERANCE_DEG = 2.0;
 
