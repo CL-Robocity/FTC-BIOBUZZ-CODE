@@ -15,7 +15,6 @@ public class Autonoma extends LinearOpMode {
     private RobotHardware  robot;
     private AutonomaConfig config;
     private ActionHandler  actions;
-    private BallLocalizer  ballLocalizer; // null se il JSON non ha segmenti search
 
     private static final double ALIGN_TOLERANCE_DEG = 2.0;
 
@@ -40,12 +39,6 @@ public class Autonoma extends LinearOpMode {
 
         actions = new ActionHandler(this, robot, follower);
 
-        // Limelight solo se serve
-        if (hasSearchSegments()) {
-            Limelight3A limelight = hardwareMap.get(Limelight3A.class, "limelight");
-            LimelightReader reader = new LimelightReader(limelight);
-            ballLocalizer = new BallLocalizer(follower, reader);
-        }
 
         telemetry.addData("Status", "Pronto");
         telemetry.addData("Segmenti", config.segments.size());
@@ -70,20 +63,11 @@ public class Autonoma extends LinearOpMode {
                 }
 
                 // line / curve / search: lo smista MotionUtils
-                MotionUtils.executeSegment(
-                        this, follower, ballLocalizer,
-                        seg, actions, collectedBalls,
-                        prevX, prevY
-                );
-                if (!opModeIsActive()) break;
 
-                prevX = seg.to.x;
-                prevY = seg.to.y;
             }
         } finally {
             // Fermo sempre il follower, anche con STOP o eccezione
             follower.breakFollowing();
-            if (ballLocalizer != null) ballLocalizer.stop();
         }
     }
 

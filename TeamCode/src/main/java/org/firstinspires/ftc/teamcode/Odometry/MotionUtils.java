@@ -27,7 +27,6 @@ public class MotionUtils {
 
     public static void executeSegment(LinearOpMode op,
                                       Follower follower,
-                                      BallLocalizer localizer,
                                       AutonomaConfig.Segment seg,
                                       ActionHandler actions,
                                       int[] collectedBalls,
@@ -47,11 +46,6 @@ public class MotionUtils {
                 actions.onSegmentEnd(act);
                 break;
             }
-
-            case "search":
-                searchBalls(op, follower, localizer, seg, actions,
-                        collectedBalls, prevX, prevY);
-                break;
 
             default:
                 throw new RuntimeException("Tipo segmento sconosciuto: " + seg.type);
@@ -160,84 +154,6 @@ public class MotionUtils {
      * (timeout di sicurezza). In entrambi i casi va al punto finale seg.to.
      * Una volta arrivato ferma l'intake e, se shoot_after, spara.
      */
-    public static void searchBalls(LinearOpMode op,
-                                   Follower follower,
-                                   BallLocalizer localizer,
-                                   AutonomaConfig.Segment seg,
-                                   ActionHandler actions,
-                                   int[] collectedBalls,
-                                   double startX, double startY) {
-
-        AutonomaConfig.SearchConfig search = seg.search;
-        double toX = seg.to.x;
-        double toY = seg.to.y;
-
-        // geometria del rettangolo di ricerca
-        double dx     = toX - startX;
-        double dy     = toY - startY;
-        double length = Math.sqrt(dx * dx + dy * dy);
-        if (length < 0.01) return; // start == end: niente da cercare
-
-        double dirX  = dx / length;
-        double dirY  = dy / length;
-        double perpX = -dirY;
-        double perpY =  dirX;
-
-        double speedPower = Math.max(0.0, Math.min(1.0,
-                search.v / MotionConfig.V_PHYSICAL_MAX));
-
-        ElapsedTime timer = new ElapsedTime();
-        actions.startIntake();
-
-        // ── fase di ricerca ───────────────────────────────────────────
-        while (op.opModeIsActive()
-                && collectedBalls[0] < MAX_BALLS
-                && timer.seconds() < search.time_limit) {
-
-            List<double[]> inRect = getBallsInRect(
-                    localizer, startX, startY,
-                    dirX, dirY, perpX, perpY,
-                    length, search.area_width);
-
-            List<double[]> targets = inRect.isEmpty()
-                    ? new ArrayList<double[]>()
-                    : groupSweeps(inRect, follower, MAX_BALLS - collectedBalls[0]);
-
-            if (!targets.isEmpty()) {
-                // ── vai verso il gruppo di palline piu' vicino ────────
-                double[] target = targets.get(0);
-
-                driveTo(op, follower, target[0], target[1], speedPower,
-                        timer, search.time_limit, -1);
-
-                collectedBalls[0] += (int) target[2];
-
-                op.telemetry.addData("Palline raccolte", collectedBalls[0]);
-                op.telemetry.update();
-                continue; // riscansiona subito
-            }
-
-            // ── nessuna pallina: avanza di uno step verso seg.to ──────
-            boolean reachedEnd = driveTo(op, follower, toX, toY, speedPower,
-                    timer, search.time_limit, SEARCH_STEP_S);
-            if (reachedEnd) break;
-        }
-
-        // ── vai SEMPRE al punto finale (4 palline o timeout) ──────────
-        if (op.opModeIsActive()) {
-            driveTo(op, follower, toX, toY, speedPower,
-                    new ElapsedTime(), FOLLOW_TIMEOUT_S, -1);
-        }
-
-        follower.setMaxPower(1.0);
-        actions.stopIntake();
-
-        // ── sparo dopo la raccolta, se richiesto ──────────────────────
-        if (search.shoot_after && collectedBalls[0] > 0 && op.opModeIsActive()) {
-            actions.shoot(search.shoot_time);
-            collectedBalls[0] = 0;
-        }
-    }
 
     // ══════════════════════════════════════════════════════════════════
     //  UTILITIES INTERNE
@@ -281,27 +197,7 @@ public class MotionUtils {
      * Palline (coordinate campo) che stanno DENTRO il rettangolo di ricerca.
      * Quelle fuori vengono scartate.
      */
-    private static List<double[]> getBallsInRect(BallLocalizer localizer,
-                                                 double startX, double startY,
-                                                 double dirX,   double dirY,
-                                                 double perpX,  double perpY,
-                                                 double length, double width) {
-        List<double[]> all    = localizer.getAbsoluteBallPositions();
-        List<double[]> result = new ArrayList<>();
 
-        for (double[] ball : all) {
-            double relX  = ball[0] - startX;
-            double relY  = ball[1] - startY;
-            double along = relX * dirX  + relY * dirY;   // 0 = start, length = end
-            double perp  = relX * perpX + relY * perpY;  // 0 = asse centrale
-
-            if (along >= 0 && along <= length
-                    && perp >= -width / 2.0 && perp <= width / 2.0) {
-                result.add(ball);
-            }
-        }
-        return result;
-    }
 
     /**
      * Raggruppa le palline raccoglibili con un solo sweep (<= 35 cm laterali)
