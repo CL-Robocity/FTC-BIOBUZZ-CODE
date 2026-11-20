@@ -52,7 +52,6 @@ public class RobotHardware{
                 GoBildaPinpointDriver.EncoderDirection.REVERSED
         );
 
-// Reset posizione e calibrazione IMU interna
 // Il robot deve rimanere fermo durante questa operazione
         pinpoint.resetPosAndIMU();
 
