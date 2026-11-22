@@ -154,3 +154,99 @@ I messaggi di commit devono permettere a chiunque di capire cosa è stato fatto 
 - [ ] Se ci sono valori da calibrare, li ho segnalati nel **README** e nel **manuale tecnico**?
 - [ ] Se non sono sicuro che funzioni, ho pushato su una **branch separata** invece che su `master`?
 - [ ] Il messaggio di commit segue il **formato** della sezione 7 ed è nello stesso commit del changelog?
+
+
+## 8. Formato dei file .md (istruzioni per l'IA)
+
+Questa sezione serve per ottenere file `.md` coerenti **senza dover dare all'IA l'intero file ogni volta**: basta passarle le istruzioni di formato qui sotto, insieme alle informazioni nuove.
+
+### Come si usa
+
+1. Copiare le **regole generali** e il **formato del file** da aggiornare (README, CHANGELOG o RULES).
+2. Sotto, scrivere in forma libera cosa è cambiato (nuova classe, nuove funzioni, valore da calibrare, modifica fatta...).
+3. L'IA risponde solo con il **blocco pronto da incollare**, indicando in quale sezione va inserito.
+4. Controllare il risultato e incollarlo nel file.
+### Regole generali (da copiare sempre)
+
+````text
+Scrivi in italiano, con tono tecnico e semplice e frasi brevi.
+Restituisci SOLO il blocco Markdown nuovo o modificato, pronto da incollare,
+e indica in una riga in quale sezione va inserito. Non riscrivere il resto del file.
+Non inventare informazioni: se manca qualcosa (valore, funzione, nome), scrivi "Da completare".
+ 
+Formattazione:
+- Nomi di file, classi, funzioni e variabili tra backtick.
+- Titoli principali con ## numerati, sottotitoli con ###, sezioni separate da ---.
+- Riga vuota prima e dopo titoli, tabelle, elenchi e blocchi di codice.
+- Tabelle per funzioni e valori; elenchi puntati solo per liste brevi.
+- Note e avvisi in citazione (>).
+- Parti non ancora scritte: *Da completare.*
+- Niente emoji e niente testo decorativo.
+````
+
+### Formato di README.md
+
+````text
+Il README ha queste sezioni, in quest'ordine:
+- Titolo "# Codice robot FTC", descrizione di 2 righe e citazione con i link a RULES.md e CHANGELOG.md.
+- "## Indice" numerato con link alle sezioni.
+- "## 1. Struttura del progetto": albero dei package e dei file in un blocco di codice, poi la riga
+  "File importanti (segnalarli sempre nel changelog quando vengono modificati): ...".
+- Un "##" numerato per ogni package. Per ogni file: "### `Nome.java`", una riga di descrizione
+  e una tabella con colonne | Funzione | Descrizione |.
+- "## Mappatura controller": una tabella per gamepad con colonne | Comando | Funzione | Stato |
+  (Stato = Implementato oppure Da completare).
+- "## Valori da calibrare a robot finito": tabella con colonne | Valore | File | Stato attuale | Note |.
+ 
+Quando aggiorni:
+- Nuova classe: nuovo "###" nel package giusto e aggiunta all'albero della struttura.
+- Nuova funzione: nuova riga nella tabella del file, con una sola frase di descrizione.
+- Valore o mappatura da sistemare a robot finito: nuova riga nella tabella dedicata e promemoria
+  che va inserito anche nel manuale tecnico sull'app.
+- Parte non ancora implementata: scrivi "*Da completare.*".
+````
+
+### Formato di CHANGELOG.md
+
+````text
+Il changelog ha il titolo "# Changelog" e una riga di introduzione con il link a RULES.md.
+Poi ci sono le date, dalla più recente alla più vecchia. Per ogni data una sezione "## GG/MM/AAAA"
+e, sotto, una voce per ogni modifica con questo formato:
+ 
+### Titolo breve – classificazione
+**NUOVO FILE: `Nome.java`**
+**FILE IMPORTANTE: `Nome.java`**
+ 
+Descrizione di cosa è stato cambiato e perché, in 1-3 frasi.
+ 
+Firma: Nome
+ 
+Regole:
+- Classificazione: solo "modifica" oppure "aggiunta".
+- Le righe NUOVO FILE e FILE IMPORTANTE compaiono solo quando servono.
+- Una voce per ogni modifica; più modifiche nello stesso giorno stanno sotto la stessa data.
+- Se la firma non è nota scrivi "Firma: _______".
+````
+
+### Formato di RULES.md
+
+````text
+Il file ha un indice numerato in alto e una sezione "## N. Titolo" per ogni argomento,
+separate da ---.
+- Le regole sono elenchi puntati, con le parole chiave in grassetto.
+- Gli esempi stanno in blocchi di codice.
+- I campi con più attributi stanno in tabella.
+- Ogni nuova regola va aggiunta anche all'indice e al "Riepilogo rapido" finale,
+  come domanda nel formato "- [ ] Ho ...?".
+- La sezione sul formato dei file .md resta sempre l'ultima.
+````
+
+### Esempio di richiesta all'IA
+
+````text
+[regole generali + formato del README]
+ 
+Aggiorna il README. Nuova classe Intake.java nel package Movmts: start() avvia l'intake
+a potenza 1, stop() lo ferma. Valore da calibrare: INTAKE_POWER, ora 1.0.
+````
+ 
