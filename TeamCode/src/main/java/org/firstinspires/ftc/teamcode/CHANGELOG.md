@@ -33,8 +33,17 @@ Richiama l'inizializzazione dei vari programmi tutto in un programma
 
 Firma: MARCHETTTO
 
-### Aggiunta Vision.java - aggiunta
+### Aggiunta classe Vision.java - aggiunta
 
 Copiato file del vision per la limelight
+
+Firma: MARCHETTO
+
+### Aggiunta classe MainTeleOp.java - aggiunta
+
+richiama solo a robot --> robot c'ha all'interno richiami di 3 classi:
+1. Hardware
+2. Vision
+3. StandardMvmnt
 
 Firma: MARCHETTO

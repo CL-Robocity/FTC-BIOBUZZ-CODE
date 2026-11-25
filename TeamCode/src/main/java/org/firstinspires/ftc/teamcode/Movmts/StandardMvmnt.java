@@ -2,26 +2,16 @@ package org.firstinspires.ftc.teamcode.Movmts;
 
 
 import org.firstinspires.ftc.teamcode.RobotHardware.Hardware;
+import org.firstinspires.ftc.teamcode.automa.Robot;
+
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class StandardMvmnt {
-    private Hardware Robot;
-    private Gamepad gamepad;
-
     double  SPEED = 0.5;
 
     double speed = SPEED;
 
-
-
-
-    public StandardMvmnt(Hardware robot, Gamepad GamePad){
-
-        this.Robot = robot;
-        this.gamepad = GamePad;
-    }
-
-    public void move(){
+    public void move(Gamepad gamepad, Hardware robot){
         double lX = gamepad.left_stick_x;
         double lY = gamepad.left_stick_y;
         double rX = gamepad.right_stick_x;
@@ -32,19 +22,19 @@ public class StandardMvmnt {
         speedControl(left_bumper, left_trigger);
 
         // set joystick sinistro
-        lX = Math.abs(lX) < .4 ? 0 : lX;
-        lY = Math.abs(lY) < .4 ? 0 : lY;
+        lX = Math.abs(lX) < .05 ? 0 : lX;
+        lY = Math.abs(lY) < .05 ? 0 : lY;
 
         // set joystick destro
-        rX = Math.abs(rX) < .2 ? 0 : rX;
+        rX = Math.abs(rX) < .05 ? 0 : rX;
 
 
         //definizione array motori e output movimento motori
         double[] MotArr = MotorOut(lX, lY, rX);
-        Robot.lfD.setPower(MotArr[0] * speed);
-        Robot.lbD.setPower(MotArr[1] * speed);
-        Robot.rfD.setPower(MotArr[2] * speed);
-        Robot.rbD.setPower(MotArr[3] * speed);
+        robot.lfD.setPower(MotArr[0] * speed);
+        robot.lbD.setPower(MotArr[1] * speed);
+        robot.rfD.setPower(MotArr[2] * speed);
+        robot.rbD.setPower(MotArr[3] * speed);
     }
 
     //--------------------------------------------
