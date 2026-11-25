@@ -1,14 +1,12 @@
-package org.firstinspires.ftc.teamcode.Movmts;
+package org.firstinspires.ftc.teamcode.movmts;
 
 
-import org.firstinspires.ftc.teamcode.RobotHardware.Hardware;
-import org.firstinspires.ftc.teamcode.automa.Robot;
+import org.firstinspires.ftc.teamcode.robothardware.Hardware;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class StandardMvmnt {
     double  SPEED = 0.5;
-
     double speed = SPEED;
 
     public void move(Gamepad gamepad, Hardware robot){

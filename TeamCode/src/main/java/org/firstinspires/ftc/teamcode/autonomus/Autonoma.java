@@ -5,7 +5,7 @@ import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.RobotHardware.Hardware;
+import org.firstinspires.ftc.teamcode.robothardware.Hardware;
 
 @Autonomous(name = "Autonoma")
 public class Autonoma extends LinearOpMode {
@@ -23,8 +23,8 @@ public class Autonoma extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        robot = new Hardware();
-        robot.init(hardwareMap, telemetry);
+        robot = new Hardware(hardwareMap, telemetry);
+
 
         config = JsonLoader.load(hardwareMap.appContext, "path.json");
         config.convertToInches();   // il JSON e' in cm, Pedro usa i pollici

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.RobotHardware;
+package org.firstinspires.ftc.teamcode.robothardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -21,7 +21,7 @@ public class Hardware {
 
 
 
-    public void init(HardwareMap hwmp, Telemetry telemetry) throws InterruptedException{
+    public Hardware(HardwareMap hwmp, Telemetry telemetry) throws InterruptedException{
 
         // ================= PINPOINT =================
         pinpoint = hwmp.get(
