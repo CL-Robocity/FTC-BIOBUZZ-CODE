@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.Movmts;
 
 
-import org.firstinspires.ftc.teamcode.RobotHardware.RobotHardware;
+import org.firstinspires.ftc.teamcode.RobotHardware.Hardware;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class StandardMvmnt {
-    private RobotHardware Robot;
+    private Hardware Robot;
     private Gamepad gamepad;
 
     double  SPEED = 0.5;
@@ -15,7 +15,7 @@ public class StandardMvmnt {
 
 
 
-    public StandardMvmnt(RobotHardware robot, Gamepad GamePad){
+    public StandardMvmnt(Hardware robot, Gamepad GamePad){
 
         this.Robot = robot;
         this.gamepad = GamePad;

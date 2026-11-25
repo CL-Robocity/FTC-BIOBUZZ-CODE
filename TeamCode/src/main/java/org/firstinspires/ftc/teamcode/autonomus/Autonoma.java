@@ -5,13 +5,13 @@ import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.RobotHardware.RobotHardware;
+import org.firstinspires.ftc.teamcode.RobotHardware.Hardware;
 
 @Autonomous(name = "Autonoma")
 public class Autonoma extends LinearOpMode {
 
     private Follower       follower;
-    private RobotHardware  robot;
+    private Hardware robot;
     private AutonomaConfig config;
     private ActionHandler actions;
 
@@ -23,7 +23,7 @@ public class Autonoma extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        robot = new RobotHardware();
+        robot = new Hardware();
         robot.init(hardwareMap, telemetry);
 
         config = JsonLoader.load(hardwareMap.appContext, "path.json");

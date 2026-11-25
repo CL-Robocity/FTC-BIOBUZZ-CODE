@@ -11,7 +11,7 @@ Il progetto usa l'odometria **goBILDA Pinpoint** per la localizzazione e una tra
 1. [Struttura del progetto](#1-struttura-del-progetto)
 2. [Package `autonomus`](#2-package-autonomus)
 3. [Package `Movmts`](#3-package-movmts)
-4. [Package `RobotHardware`](#4-package-robothardware)
+4. [Package `Hardware`](#4-package-robothardware)
 5. [Mappatura controller](#5-mappatura-controller)
 6. [Valori da calibrare a robot finito](#6-valori-da-calibrare-a-robot-finito)
 
@@ -51,7 +51,7 @@ Movimento manuale mecanum da gamepad.
 
 ---
 
-## 4. Package `RobotHardware`
+## 4. Package `Hardware`
 
 ### `RobotHardware.java`
 Dichiara e inizializza l'hardware del robot.

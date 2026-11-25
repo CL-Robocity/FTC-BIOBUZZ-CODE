@@ -4,15 +4,15 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.RobotHardware.RobotHardware;
+import org.firstinspires.ftc.teamcode.RobotHardware.Hardware;
 
 public class ActionHandler {
 
     private final LinearOpMode  op;
-    private final RobotHardware robot;
+    private final Hardware robot;
     private final Follower      follower;
 
-    public ActionHandler(LinearOpMode op, RobotHardware robot, Follower follower) {
+    public ActionHandler(LinearOpMode op, Hardware robot, Follower follower) {
         this.op       = op;
         this.robot    = robot;
         this.follower = follower;

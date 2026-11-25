@@ -1,11 +1,6 @@
 package org.firstinspires.ftc.teamcode.RobotHardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.IMU;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
@@ -13,9 +8,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-public class RobotHardware{
+public class Hardware {
     //costruttore di classe
-    public RobotHardware(){}
+    public Hardware(){}
 
     // variabile motori di movimento
     public DcMotor lfD; // sinistro avanti
