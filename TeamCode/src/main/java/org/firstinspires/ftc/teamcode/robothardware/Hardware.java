@@ -77,10 +77,10 @@ public class Hardware {
         rbD.setDirection(DcMotor.Direction.FORWARD);
 
         // set per runnare i motori
-        lfD.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        lbD.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rbD.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rfD.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        lfD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        lbD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rbD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rfD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // set movimento a potenza 0
         lfD.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

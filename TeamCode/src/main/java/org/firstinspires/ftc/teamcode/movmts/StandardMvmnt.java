@@ -6,12 +6,12 @@ import org.firstinspires.ftc.teamcode.robothardware.Hardware;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class StandardMvmnt {
-    double  SPEED = 0.5;
+    double  SPEED = 1;
     double speed = SPEED;
 
     public void move(Gamepad gamepad, Hardware robot){
         double lX = gamepad.left_stick_x;
-        double lY = gamepad.left_stick_y;
+        double lY = -gamepad.left_stick_y;
         double rX = gamepad.right_stick_x;
         boolean left_bumper = gamepad.left_bumper;
         double left_trigger = gamepad.left_trigger;

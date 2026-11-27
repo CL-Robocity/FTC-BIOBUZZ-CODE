@@ -37,6 +37,7 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addData("Colore palla riconosciuto",(robot.vision.currentPipeLine==1) ? "rosso"
                     : (robot.vision.currentPipeLine==2) ? "Blu"
                     : "Giallo");
+            telemetry.addData("Limelight", (robot.vision.isAvailable())?"attiva":"non collegata");
             telemetry.update();
         }
 
