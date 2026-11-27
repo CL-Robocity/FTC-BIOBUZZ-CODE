@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode.Odometry;
+package org.firstinspires.ftc.teamcode.Odometry.motion;
+
+import org.firstinspires.ftc.teamcode.Odometry.AutonomaConfig;
 
 public class MotionConfig {
 

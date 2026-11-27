@@ -99,7 +99,7 @@ public class teleop extends LinearOpMode {
                 AprilTagDetection target  = vision.getTag(TARGET_TAG);
                 AprilTagDetection closest = vision.getClosestTag();
 
-                if (target != null) {
+                /*if (target != null) {
                     telemetry.addLine("Tag " + TARGET_TAG + " visibile");
                     telemetry.addData("x (cm)",   "%.1f", target.ftcPose.x);
                     telemetry.addData("y (cm)",   "%.1f", target.ftcPose.y);
@@ -112,7 +112,7 @@ public class teleop extends LinearOpMode {
                     telemetry.addData("yaw",      "%.1f", closest.ftcPose.yaw);
                 } else {
                     telemetry.addData("Tag", "nessuno visibile");
-                }
+                }*/
 
                 telemetry.update();
             }
